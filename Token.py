@@ -1,8 +1,6 @@
-from typing import Optional
 from datetime import timedelta, datetime
 from jose import jwt, JWTError
 from .schemas import TokenData, User
-from . import SECRET_KEY, token, ALGORITHM
 
 SECRET_KEY ="09d25e094faa6"
 ALGORITHM = "HS256"
@@ -21,6 +19,6 @@ def verify_token(token:str, credentials_exception:dict):
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
-        token_data = TokenData(email=User.email)
+        token_data = TokenData(email=email)
     except JWTError:
         raise credentials_exception
